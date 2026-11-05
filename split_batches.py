@@ -17,7 +17,7 @@ INCOMING = Path("data/incoming")
 MANIFEST = Path("data/MANIFEST.json")
 SOURCE = "Росгидромет / ГГО им. Воейкова; обработка «Если быть точным», https://tochno.st/datasets/air_cities (CC BY)"
 
-INITIAL_LAST_YEAR = 2017          # 2007–2017 -> ~61 % записей (ближайшая к 60 % годовая граница)
+INITIAL_LAST_YEAR = 2017          # 2007–2017 61 % записей (ближайшая к 60 % годовая граница)
 BATCHES = [(2018, 2019), (2020, 2021), (2022, 2023), (2024, 2024)]  # 4 порции: выгрузки за 1–2 года
 
 
