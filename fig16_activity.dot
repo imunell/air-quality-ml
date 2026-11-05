@@ -1,0 +1,34 @@
+digraph G { rankdir=TB; nodesep=0.35; ranksep=0.35; dpi=200;
+ node [fontname="Liberation Sans", fontsize=10.5, style="rounded,filled", shape=box, fillcolor="#DCE6F2", color="#1F3A5F", margin="0.15,0.08"];
+ edge [fontname="Liberation Sans", fontsize=9.5, color="#444444"];
+ s [shape=circle, label="", width=0.25, fillcolor="#222222"];
+ e [shape=doublecircle, label="", width=0.22, fillcolor="#222222"];
+ a1 [label="Загрузка файла порции
+(чтение, приведение типов)"];
+ a2 [label="Проверка качества
+(требования Q-01…Q-08)"];
+ d1 [shape=diamond, style="filled", label="Критические
+нарушения?", fillcolor="#FFF2CC"];
+ stop [label="Отклонить порцию,
+сохранить отчёт", fillcolor="#F8D7DA"];
+ a3 [label="Очистка: −9 → NaN, ключ города,
+разбор «5+1», удаление дублей"];
+ a4 [label="Формирование признаков
+(лаги, выбросы на душу, динамика)"];
+ d2 [shape=diamond, style="filled", label="Режим?", fillcolor="#FFF2CC"];
+ t1 [label="Оценить параметры по обучающим данным
+(медианы, кодировщики, границы групп)", fillcolor="#FCE4D6", color="#B35F00"];
+ t2 [label="Сохранить параметры
+(artifacts/preprocessor.pkl)", fillcolor="#FCE4D6", color="#B35F00"];
+ b1 [label="Загрузить сохранённые параметры"];
+ a5 [label="Применить преобразования
+(без повторной оценки)"];
+ a6 [label="Сохранить таблицу признаков
+и отчёт о проверке (parquet)"];
+ s -> a1 -> a2 -> d1; d1 -> stop [label=" да"]; stop -> e;
+ d1 -> a3 [label=" нет"]; a3 -> a4 -> d2;
+ d2 -> t1 [label=" обучение"]; t1 -> t2 -> a5;
+ d2 -> b1 [label=" новая порция"]; b1 -> a5;
+ a5 -> a6 -> e;
+ leg1 [shape=plaintext, style="", label=<<table border="0" cellborder="1" cellspacing="0"><tr><td bgcolor="#DCE6F2">общий шаг (обучение и новая порция)</td></tr><tr><td bgcolor="#FCE4D6">только при обучении</td></tr></table>>];
+}

@@ -1,0 +1,40 @@
+digraph G { rankdir=TB; nodesep=0.5; ranksep=0.9; dpi=200;
+ node [shape=box, style="rounded,filled", fontname="Liberation Sans", fontsize=11, margin="0.2,0.12", color="#1F3A5F", fontcolor=white];
+ edge [fontname="Liberation Sans", fontsize=10, color="#444444"];
+ analyst [label="Эколог-аналитик
+[Пользователь]
+Смотрит прогнозы, карту
+и показатели", fillcolor="#08427B"];
+ lpr [label="Представитель администрации
+[Пользователь]
+Принимает решения по
+приоритетам проверок", fillcolor="#08427B"];
+ dev [label="Инженер данных / MLOps
+[Пользователь]
+Загружает порции,
+переобучает модель", fillcolor="#08427B"];
+ sys [label="Система прогнозирования
+качества воздуха
+[Программная система]
+Проверяет данные, прогнозирует уровень
+загрязнения и пересчитывает показатели", fillcolor="#1168BD", width=4.6, height=1.5];
+ ggo [label="Ежегодник ГГО им. Воейкова /
+каталог «Если быть точным»
+[Внешний источник данных]
+CSV, XLSX, PARQUET (раз в год)", fillcolor="#8A8A8A"];
+ gh [label="GitHub + DVC-хранилище
+[Внешняя система]
+Код, версии данных, CI/CD", fillcolor="#8A8A8A"];
+ ggo -> sys [label=" новая порция данных
+ (файл)"];
+ dev -> sys [label=" запускает обновление,
+ обучение"];
+ analyst -> sys [label=" просматривает
+ прогнозы и показатели"];
+ lpr -> sys [label=" получает показатели
+ и карту риска"];
+ sys -> gh [label=" версии кода
+ и данных", dir=both];
+ {rank=same; analyst; lpr; dev}
+ {rank=same; ggo; gh}
+}

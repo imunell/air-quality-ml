@@ -1,0 +1,19 @@
+digraph G { rankdir=LR; nodesep=0.28; ranksep=1.2; dpi=200; compound=true;
+ node [fontname="Liberation Sans", fontsize=10.5];
+ edge [fontname="Liberation Sans", fontsize=9, arrowhead=none, color="#444444"];
+ node [shape=box, style="filled", fillcolor="#F2F2F2", color="#444444"];
+ analyst [label="Эколог-аналитик"]; lpr [label="Представитель
+администрации"]; dev [label="Инженер данных /
+MLOps"]; src [label="Источник данных
+(ГГО)", fillcolor="#DDDDDD"];
+ subgraph cluster_s { label="Система прогнозирования качества воздуха"; style=rounded; color="#1F3A5F"; fontname="Liberation Sans";
+  node [shape=ellipse, style="filled", fillcolor="#DCE6F2", color="#1F3A5F", width=2.6, height=0.62];
+  u1 [label="Загрузить новую порцию данных"]; u2 [label="Проверить качество данных"]; u3 [label="Обучить / переобучить модель"];
+  u4 [label="Получить прогноз по городу"]; u5 [label="Просмотреть ключевые показатели"]; u6 [label="Просмотреть карту рисков"];
+  u7 [label="Просмотреть отчёт о дрейфе"]; u8 [label="Выгрузить прогнозы (CSV)"];
+ }
+ src -> u1; dev -> u1; dev -> u3; dev -> u7; analyst -> u4; analyst -> u5; analyst -> u6; analyst -> u8; lpr -> u5; lpr -> u6;
+ u1 -> u2 [style=dashed, arrowhead=vee, label=" «include»"];
+ u7 -> u3 [style=dashed, arrowhead=vee, label=" «extend»", dir=back];
+ {rank=same; analyst; lpr; dev; src}
+}
