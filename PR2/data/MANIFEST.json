@@ -1,0 +1,44 @@
+[
+  {
+    "file": "data/raw/data_air_cities_100_v20260617.csv",
+    "rows": 4479,
+    "sha256": "ceb4a21f203fc4008bf0d47863e25bf259421cb971abe7094a040480ea75c68b",
+    "years": "2007–2024",
+    "source": "Росгидромет / ГГО им. Воейкова; обработка «Если быть точным», https://tochno.st/datasets/air_cities (CC BY)"
+  },
+  {
+    "file": "data/interim/initial_part.csv",
+    "rows": 2748,
+    "sha256": "39bd26079b8c2a1bfa04dfa41e10ab365367372cd2912b49611cea863e7f7822",
+    "years": "2007–2017",
+    "source": "data/raw/data_air_cities_100_v20260617.csv"
+  },
+  {
+    "file": "data/incoming/batch_01.csv",
+    "rows": 496,
+    "sha256": "45a2286d38b4e9fc3ef20eaecabc567b794f5336352df550cadddf7f60b6f8c5",
+    "years": "2018–2019",
+    "source": "data/raw/data_air_cities_100_v20260617.csv"
+  },
+  {
+    "file": "data/incoming/batch_02.csv",
+    "rows": 499,
+    "sha256": "a25c74af2e47106f7e92198f54ce1732d76ff02a5a1af1a3f600423e27e4fa5e",
+    "years": "2020–2021",
+    "source": "data/raw/data_air_cities_100_v20260617.csv"
+  },
+  {
+    "file": "data/incoming/batch_03.csv",
+    "rows": 490,
+    "sha256": "880363980c8279d3a0a5d11f021e2a4d56773541cea450c3cc9faafeb5d7a9b6",
+    "years": "2022–2023",
+    "source": "data/raw/data_air_cities_100_v20260617.csv"
+  },
+  {
+    "file": "data/incoming/batch_04.csv",
+    "rows": 246,
+    "sha256": "d23b7dcda38e9d025bb4769ae58a37b1380131b1e062db0dc7534b92869d0c6f",
+    "years": "2024–2024",
+    "source": "data/raw/data_air_cities_100_v20260617.csv"
+  }
+]
