@@ -1,0 +1,55 @@
+digraph G { rankdir=TB; newrank=true; nodesep=0.5; ranksep=0.75; dpi=200;
+ node [shape=box, style="rounded,filled", fontname="Liberation Sans", fontsize=10.5, margin="0.15,0.1", color="#1F3A5F", fontcolor=white, fillcolor="#1168BD", width=2.5];
+ edge [fontname="Liberation Sans", fontsize=9, color="#444444"];
+ dev  [label="Инженер данных / MLOps", fillcolor="#08427B"];
+ ggo  [label="Источник данных
+(ГГО, «Если быть точным»)", fillcolor="#8A8A8A"];
+ user [label="Аналитик / представитель
+администрации", fillcolor="#08427B"];
+ subgraph cluster_sys { label="Система прогнозирования качества воздуха"; labeljust=l; fontname="Liberation Sans"; fontsize=12; style="dashed"; color="#1F3A5F"; margin=18;
+   ingest [label="Приём данных
+[Python CLI]
+загрузка порции в data/incoming"];
+   pipe   [label="Пайплайн подготовки
+[Python, pandas, Pandera]
+проверка, очистка, признаки"];
+   store  [label="Хранилище данных
+[parquet + DVC]
+raw / interim / processed / витрина", shape=cylinder, fillcolor="#2E8B57", width=3.2];
+   ml     [label="ML-модуль
+[scikit-learn, CatBoost]
+обучение и прогноз"];
+   kpi    [label="Расчёт показателей
+[Python]
+KPI при каждой порции"];
+   mlflow [label="MLflow
+[Tracking + Registry]
+эксперименты, версии моделей", shape=cylinder, fillcolor="#2E8B57"];
+   dash   [label="Панель
+[Streamlit]
+карта, KPI, динамика"];
+   mon    [label="Мониторинг
+[Evidently AI]
+дрейф, качество"];
+   api    [label="API
+[FastAPI, Docker]
+прогноз по запросу"];
+ }
+ {rank=same; dev; ggo}
+ {rank=same; ingest; pipe}
+ {rank=same; ml; kpi; mlflow}
+ {rank=same; dash; mon; api}
+ dev -> ingest [label=" make update"]; ggo -> ingest [label=" файл порции"];
+ ingest -> pipe; pipe -> store [label=" признаки,
+ отчёт проверки"];
+ store -> ml [dir=both, label=" признаки /
+ прогнозы"]; store -> kpi [dir=both, label=" прогнозы /
+ kpi_history"];
+ ml -> mlflow [label=" метрики,
+ модель"];
+ ml -> kpi -> mlflow [style=invis];
+ store -> dash; store -> mon; mlflow -> api [label=" модель"]; store -> api [constraint=false];
+ mon -> dash [label=" отчёт о дрейфе", constraint=false];
+ dash -> mon -> api [style=invis];
+ dash -> user [dir=back, label=" браузер (HTTPS)"]; api -> user [dir=back, style=dashed, label=" JSON / REST"];
+}
