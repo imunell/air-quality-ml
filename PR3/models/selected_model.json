@@ -1,0 +1,16 @@
+{
+ "name": "logreg_l1",
+ "params": {
+  "C": 0.03,
+  "class_weight": "balanced"
+ },
+ "feature_set": "C",
+ "trained": "2026-11-11",
+ "cv_roc_auc": 0.946,
+ "cv_roc_auc_std": 0.041,
+ "cv_pr_auc": 0.919,
+ "cv_macro_f1": 0.649,
+ "cv_qwk": 0.767,
+ "cv_recall_high": 0.923,
+ "selection_rule": "максимум среднего ROC-AUC; при разнице < 0.005 — более простая модель"
+}
